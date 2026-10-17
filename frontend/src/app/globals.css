@@ -1,32 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Montserrat:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
 
 :root {
-  --bg-primary: #0a0a12;
-  --bg-secondary: #12121e;
-  --bg-card: rgba(22, 22, 38, 0.7);
-  --bg-card-hover: rgba(30, 30, 50, 0.8);
-  --bg-input: rgba(28, 28, 48, 0.6);
-  --border-color: rgba(99, 102, 241, 0.15);
-  --border-focus: rgba(99, 102, 241, 0.5);
-  --text-primary: #f0f0f8;
-  --text-secondary: #9ca3b0;
-  --text-muted: #6b7280;
-  --accent-primary: #6366f1;
-  --accent-secondary: #8b5cf6;
-  --accent-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
-  --accent-glow: rgba(99, 102, 241, 0.25);
-  --success: #10b981;
-  --error: #ef4444;
-  --warning: #f59e0b;
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
-  --shadow-glow: 0 0 30px rgba(99, 102, 241, 0.15);
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --bg-black: #07070a;
+  --bg-dark: #0e0e14;
+  --bg-card: rgba(16, 16, 24, 0.88);
+  --bg-card-hover: rgba(22, 22, 34, 0.95);
+  --bg-input: rgba(20, 20, 30, 0.85);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-card: rgba(255, 255, 255, 0.1);
+  --border-focus: #e50914;
+  --text-white: #ffffff;
+  --text-light: #e5e7eb;
+  --text-muted: #9ca3af;
+  --text-dim: #6b7280;
+  --lux-red: #e50914;
+  --lux-red-bright: #ff1e2d;
+  --lux-red-hover: #b80710;
+  --lux-red-glow: rgba(229, 9, 20, 0.45);
+  --font-heading: 'Montserrat', sans-serif;
+  --font-serif: 'Cinzel', serif;
+  --font-body: 'Inter', sans-serif;
+  --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 * {
@@ -37,97 +31,1098 @@
 
 html {
   scroll-behavior: smooth;
+  background: var(--bg-black);
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: var(--bg-primary);
-  color: var(--text-primary);
+  font-family: var(--font-body);
+  background: var(--bg-black);
+  color: var(--text-light);
   min-height: 100vh;
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ─── Animated Background ─────────────────────────────────────── */
-.backgroundGlow {
+/* ─── Animated Flowing Red Background Canvas (nodebase style) ─── */
+.flowingRedCanvas {
   position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.9;
+}
+
+/* ─── Luxury Page Wrapper ─────────────────────────────────────── */
+.luxuryPage {
+  position: relative;
+  width: 100%;
+  overflow-x: hidden;
+  background: transparent;
+  z-index: 1;
+}
+
+.luxContainer {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* ─── Luxury Top Header with Even Spacing (Image 1 Fix) ───────── */
+.luxHeader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 70%, transparent 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+}
+
+.luxHeaderInner {
+  max-width: 1350px;
+  margin: 0 auto;
+  padding: 24px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Brand Logo */
+.luxLogoBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.luxLogoMain {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  color: var(--text-white);
+  text-transform: uppercase;
+}
+
+.luxLogoSub {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  margin-top: 2px;
+}
+
+.luxLogoLine {
+  flex-grow: 1;
+  height: 1px;
+  background: rgba(229, 9, 20, 0.6);
+}
+
+.luxLogoText {
+  font-size: 0.58rem;
+  letter-spacing: 0.25em;
+  color: var(--lux-red);
+  font-weight: 600;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.luxLogoCity {
+  font-size: 0.5rem;
+  letter-spacing: 0.35em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-top: 1px;
+}
+
+/* Navigation Links — Clean & Evenly Spaced */
+.luxNav {
+  display: flex;
+  align-items: center;
+  gap: 38px;
+}
+
+.luxNavLink {
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--text-white);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: var(--transition);
+  padding: 6px 0;
+  position: relative;
+}
+
+.luxNavLink:hover {
+  color: var(--lux-red-bright);
+}
+
+.luxNavLink.active {
+  color: var(--lux-red);
+}
+
+.luxNavLink.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--lux-red);
+}
+
+/* Header Right Actions */
+.luxHeaderActions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-shrink: 0;
+}
+
+.luxCallUs {
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--text-white);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition);
+}
+
+.luxCallUs:hover {
+  color: var(--lux-red);
+}
+
+.phoneSvg {
+  color: var(--lux-red);
+}
+
+.luxBtnPostNav {
+  padding: 10px 22px;
+  background: var(--lux-red);
+  color: var(--text-white);
+  border: none;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.luxBtnPostNav:hover {
+  background: var(--lux-red-hover);
+  box-shadow: 0 0 20px var(--lux-red-glow);
+}
+
+/* ─── Hero Section with Atmospheric Image ─── */
+.luxHero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 150px 24px 100px;
+  background-image: url('/hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.luxHeroOverlay {
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  background: radial-gradient(circle at center, rgba(7, 7, 10, 0.4) 0%, rgba(7, 7, 10, 0.85) 75%, #07070a 100%),
+              linear-gradient(to bottom, rgba(7, 7, 10, 0.6) 0%, transparent 40%, rgba(7, 7, 10, 0.95) 90%, #07070a 100%);
   pointer-events: none;
-  z-index: 0;
+}
+
+.luxHeroContent {
+  position: relative;
+  z-index: 10;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.luxHeroTitle {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1.25;
+  color: var(--text-white);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+}
+
+.luxHeroSubtitle {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  color: #d1d5db;
+  line-height: 1.7;
+  max-width: 780px;
+  margin: 0 auto 40px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.luxHeroButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.luxBtnRed {
+  padding: 16px 36px;
+  background: var(--lux-red);
+  color: var(--text-white);
+  border: none;
+  border-radius: 2px;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 4px 20px var(--lux-red-glow);
+}
+
+.luxBtnRed:hover {
+  background: var(--lux-red-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(229, 9, 20, 0.6);
+}
+
+.luxBtnRedOutline {
+  padding: 15px 34px;
+  background: rgba(14, 14, 20, 0.7);
+  border: 1px solid var(--lux-red);
+  border-radius: 2px;
+  color: var(--text-white);
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+  display: inline-block;
+}
+
+.luxBtnRedOutline:hover {
+  background: var(--lux-red);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px var(--lux-red-glow);
+}
+
+.luxHeroBottomBadge {
+  position: absolute;
+  bottom: 24px;
+  right: 36px;
+  z-index: 10;
+  font-family: var(--font-heading);
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  border-left: 2px solid var(--lux-red);
+  padding-left: 10px;
+}
+
+/* ─── Typography & Dividers ─── */
+.luxSection {
+  padding: 90px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.luxOverline {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  color: var(--lux-red);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.luxHeading {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-white);
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+
+.redDivider {
+  width: 44px;
+  height: 2px;
+  background: var(--lux-red);
+  margin: 18px 0 24px;
+}
+
+.redDivider.center {
+  margin: 18px auto 24px;
+}
+
+.sectionTitleCenter {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 50px;
+}
+
+.luxSectionDesc {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.luxParagraph {
+  color: #d1d5db;
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 18px;
+  font-weight: 300;
+}
+
+/* ─── About Section ─── */
+.aboutSection {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background: linear-gradient(to bottom, rgba(7, 7, 10, 0.95), rgba(11, 11, 16, 0.95));
+}
+
+.aboutGrid {
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.statBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.statNum {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--lux-red);
+  letter-spacing: 0.05em;
+}
+
+.statLabel {
+  font-family: var(--font-heading);
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* ─── Categories Section: Interactive Mouse-Following Neon Border (Image 5 Fix) ─── */
+.servicesSection {
+  background: rgba(9, 9, 14, 0.92);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.categoryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.luxCategoryCard {
+  position: relative;
+  background: rgba(16, 16, 24, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  padding: 44px 32px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
 }
 
-.backgroundGlow::before {
+/* Mouse-tracking neon spotlight border */
+.luxCategoryCard::after {
   content: '';
   position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(ellipse at 30% 20%, rgba(99, 102, 241, 0.06) 0%, transparent 50%),
-              radial-gradient(ellipse at 70% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 50%),
-              radial-gradient(ellipse at 50% 50%, rgba(168, 85, 247, 0.03) 0%, transparent 60%);
-  animation: bgShift 20s ease-in-out infinite;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: radial-gradient(320px circle at var(--mouse-x, -999px) var(--mouse-y, -999px), #ff1e2d 0%, rgba(229, 9, 20, 0.7) 40%, transparent 75%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+  z-index: 2;
 }
 
-@keyframes bgShift {
-  0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  33% { transform: translate(2%, -2%) rotate(1deg); }
-  66% { transform: translate(-1%, 1%) rotate(-0.5deg); }
+/* Subtle mouse-tracking ambient glow inside */
+.luxCategoryCard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(400px circle at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(229, 9, 20, 0.12), transparent 75%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+  z-index: 1;
 }
 
-/* ─── Layout ──────────────────────────────────────────────────── */
-.appContainer {
+.luxCategoryCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(229, 9, 20, 0.2);
+}
+
+.luxCategoryCard:hover::after,
+.luxCategoryCard:hover::before {
+  opacity: 1;
+}
+
+.catCardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 3;
+}
+
+.catNumber {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--lux-red);
+  letter-spacing: 0.05em;
+}
+
+.catArrow {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  transition: var(--transition);
+}
+
+.luxCategoryCard:hover .catArrow {
+  color: var(--lux-red);
+  transform: translateX(6px);
+}
+
+.catTitle {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-white);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 3;
+}
+
+.catTagline {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--lux-red);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  display: block;
+  position: relative;
+  z-index: 3;
+}
+
+.catDesc {
+  color: #9ca3af;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  flex-grow: 1;
+  position: relative;
+  z-index: 3;
+}
+
+.catFeaturesList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 28px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+  z-index: 3;
+}
+
+.catFeatureItem {
+  font-size: 0.8rem;
+  color: #d1d5db;
+  letter-spacing: 0.03em;
+}
+
+.bullet {
+  color: var(--lux-red);
+  font-size: 0.65rem;
+  margin-right: 6px;
+}
+
+.catAction {
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  z-index: 3;
+}
+
+.catActionText {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--lux-red);
+  text-transform: uppercase;
+}
+
+/* ─── Live Feed Section (Image 2 Fix: No nested boxes, clean SVG icons) ─── */
+.feedSection {
+  background: rgba(7, 7, 10, 0.94);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.feedSectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 30px;
+}
+
+.luxBtnRefresh {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  color: var(--text-light);
+  padding: 10px 20px;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.luxBtnRefresh:hover {
+  border-color: var(--lux-red);
+  color: var(--lux-red);
+}
+
+/* ─── Minimalist Filter Tabs (No clunky filled boxes) ─── */
+.minimalFilterTabs {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 36px;
+  overflow-x: auto;
+}
+
+.minFilterTab {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 14px 4px;
+  cursor: pointer;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.minFilterTab:hover {
+  color: var(--text-white);
+}
+
+.minFilterTab.active {
+  color: var(--text-white);
+}
+
+.minFilterTab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--lux-red);
+  box-shadow: 0 0 10px var(--lux-red);
+}
+
+.tabCount {
+  font-size: 0.65rem;
+  padding: 2px 7px;
+  border-radius: 2px;
+  background: rgba(229, 9, 20, 0.15);
+  color: var(--lux-red);
+  font-weight: 700;
+}
+
+/* ─── VIP Ticket Pass Card Grid (Human-Crafted, Natural Layout) ─── */
+.ticketGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 28px;
+}
+
+.ticketCard {
+  background: linear-gradient(145deg, rgba(20, 20, 28, 0.85) 0%, rgba(12, 12, 18, 0.95) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 3px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+  backdrop-filter: blur(16px);
+}
+
+.ticketCard:hover {
+  transform: translateY(-5px);
+  border-color: rgba(229, 9, 20, 0.35);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.7), 0 0 25px rgba(229, 9, 20, 0.12);
+}
+
+/* Top Row: Pure Typography Date & Category (Zero Boxes) */
+.ticketTopRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 18px;
+}
+
+.cardDateText {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.dateDayNum {
+  font-family: var(--font-heading);
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: var(--text-white);
+  line-height: 1;
+}
+
+.dateMonthText {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--lux-red);
+  text-transform: uppercase;
+}
+
+.ticketMetaRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+}
+
+.ticketCategory {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--lux-red);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ticketDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--lux-red);
+  box-shadow: 0 0 6px var(--lux-red);
+}
+
+.ticketType {
+  font-family: var(--font-heading);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+/* Event Title & Location */
+.ticketTitle {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-white);
+  line-height: 1.35;
+  margin-bottom: 8px;
+}
+
+.ticketLocation {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+.locPin {
+  color: var(--lux-red);
+  flex-shrink: 0;
+}
+
+/* Natural Inline Specifications (Pure Typography, No Pills, No Boxes) */
+.cardSpecsText {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.88rem;
+  color: #d1d5db;
+  margin-top: auto;
+  margin-bottom: 22px;
+  line-height: 1.5;
+}
+
+.specInline {
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.specInline.accent {
+  color: var(--lux-red);
+  font-weight: 600;
+}
+
+.specDot {
+  color: var(--text-dim);
+  font-size: 0.75rem;
+}
+
+/* Ticket Footer (No Green Color) */
+.ticketFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 14px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.08);
+  font-family: var(--font-heading);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+}
+
+.ticketId {
+  color: var(--text-dim);
+  font-weight: 600;
+}
+
+.ticketStatus {
+  color: var(--lux-red);
+  font-weight: 700;
+}
+
+.luxLoadingBox,
+.luxEmptyBox {
+  text-align: center;
+  padding: 80px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 3px;
+}
+
+.luxEmptyBox h3 {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  letter-spacing: 0.1em;
+  color: var(--text-white);
+  margin-bottom: 8px;
+}
+
+.luxEmptyBox p {
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.luxSpinner {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  border: 2px solid rgba(229, 9, 20, 0.2);
+  border-top-color: var(--lux-red);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 12px;
+}
+
+/* ─── Human & Authentic Footer ─── */
+.luxFooter {
+  background: #050508;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 60px 0 28px;
   position: relative;
   z-index: 1;
+}
+
+.humanFooterGrid {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr 1.6fr;
+  gap: 50px;
+  margin-bottom: 45px;
+}
+
+.humanFooterBio {
+  color: #9ca3af;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  margin-top: 18px;
+  max-width: 360px;
+}
+
+.footerColTitle {
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--text-white);
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  position: relative;
+  padding-bottom: 6px;
+}
+
+.footerColTitle::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 20px;
+  height: 2px;
+  background: var(--lux-red);
+}
+
+.footerLinks {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footerLinks a {
+  color: #9ca3af;
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: var(--transition);
+}
+
+.footerLinks a:hover {
+  color: var(--lux-red);
+  transform: translateX(4px);
+  display: inline-block;
+}
+
+.humanContactList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.humanContactItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #d1d5db;
+  font-size: 0.88rem;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.humanContactItem:hover {
+  color: var(--lux-red);
+}
+
+.contactSvg {
+  color: var(--lux-red);
+  flex-shrink: 0;
+}
+
+.contactIcon {
+  color: var(--lux-red);
+}
+
+.mt16 {
+  margin-top: 16px;
+}
+
+.footerBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  font-family: var(--font-heading);
+  letter-spacing: 0.1em;
+}
+
+.footerTechBadge {
+  color: var(--lux-red);
+}
+
+/* ─── Wizard View: Side-Aligned Back Button & Flowing Red Background ─── */
+.wizardPageWrapper {
+  position: relative;
   min-height: 100vh;
+  background: var(--bg-black);
+}
+
+.wizardTopNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 40px;
+  position: relative;
+  z-index: 20;
+}
+
+.btnSideBack {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 22px;
+  background: rgba(22, 22, 32, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 2px;
+  color: var(--text-light);
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btnSideBack:hover {
+  background: rgba(229, 9, 20, 0.15);
+  border-color: var(--lux-red);
+  color: var(--lux-red);
+  transform: translateX(-4px);
+}
+
+.wizardTopBrand {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  color: var(--text-white);
+}
+
+.appContainer {
+  position: relative;
+  z-index: 10;
+  min-height: calc(100vh - 80px);
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px 20px 60px;
+  padding: 20px 20px 80px;
 }
 
 .header {
   text-align: center;
-  margin-bottom: 48px;
+  margin-bottom: 40px;
 }
 
 .logo {
-  font-size: 2.5rem;
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
   font-weight: 800;
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  letter-spacing: -0.03em;
-  margin-bottom: 8px;
+  letter-spacing: 0.2em;
+  color: var(--text-white);
+  text-transform: uppercase;
+  margin-bottom: 6px;
 }
 
 .subtitle {
-  color: var(--text-secondary);
-  font-size: 1rem;
-  font-weight: 400;
-  letter-spacing: 0.02em;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-family: var(--font-heading);
 }
 
-/* ─── Step Indicator ──────────────────────────────────────────── */
+/* Step Indicator */
 .stepIndicator {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0;
   margin-bottom: 40px;
   width: 100%;
-  max-width: 600px;
+  max-width: 620px;
 }
 
 .stepItem {
   display: flex;
   align-items: center;
-  gap: 0;
 }
 
 .stepCircle {
@@ -138,7 +1133,8 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 0.875rem;
-  font-weight: 600;
+  font-weight: 700;
+  font-family: var(--font-heading);
   transition: var(--transition);
   position: relative;
   flex-shrink: 0;
@@ -146,27 +1142,22 @@ body {
 
 .stepCircle.inactive {
   background: var(--bg-input);
-  color: var(--text-muted);
-  border: 2px solid var(--border-color);
+  color: var(--text-dim);
+  border: 1px solid var(--border-card);
 }
 
 .stepCircle.active {
-  background: var(--accent-gradient);
-  color: white;
-  border: 2px solid transparent;
-  box-shadow: 0 0 20px var(--accent-glow), var(--shadow-md);
-  animation: stepPulse 2s ease-in-out infinite;
+  background: var(--lux-red);
+  color: var(--text-white);
+  border: 1px solid transparent;
+  box-shadow: 0 0 20px var(--lux-red-glow);
 }
 
 .stepCircle.completed {
-  background: var(--success);
-  color: white;
-  border: 2px solid transparent;
-}
-
-@keyframes stepPulse {
-  0%, 100% { box-shadow: 0 0 20px var(--accent-glow); }
-  50% { box-shadow: 0 0 30px rgba(99, 102, 241, 0.35); }
+  background: var(--lux-red);
+  color: var(--text-white);
+  border: 1px solid transparent;
+  box-shadow: 0 0 14px var(--lux-red-glow);
 }
 
 .stepLabel {
@@ -174,70 +1165,65 @@ body {
   top: 52px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 0.7rem;
-  font-weight: 500;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   white-space: nowrap;
-  color: var(--text-muted);
-  transition: var(--transition);
+  color: var(--text-dim);
+  font-family: var(--font-heading);
 }
 
 .stepLabel.activeLabel {
-  color: var(--accent-primary);
+  color: var(--lux-red);
 }
 
 .stepLine {
   width: 60px;
   height: 2px;
-  background: var(--border-color);
+  background: var(--border-subtle);
   transition: var(--transition);
-  flex-shrink: 0;
 }
 
 .stepLine.completedLine {
-  background: var(--success);
+  background: var(--lux-red);
 }
 
-/* ─── Form Card ───────────────────────────────────────────────── */
+/* Form Card */
 .formCard {
   width: 100%;
-  max-width: 680px;
-  background: var(--bg-card);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-xl);
-  padding: 40px;
-  box-shadow: var(--shadow-lg), var(--shadow-glow);
-  animation: cardEnter 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  max-width: 740px;
+  background: rgba(16, 16, 24, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  padding: 44px;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.85);
+  animation: cardEnter 0.4s ease;
 }
 
 @keyframes cardEnter {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .stepTitle {
-  font-size: 1.5rem;
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
   font-weight: 700;
-  margin-bottom: 6px;
-  color: var(--text-primary);
-  letter-spacing: -0.02em;
+  letter-spacing: 0.08em;
+  color: var(--text-white);
+  text-transform: uppercase;
+  margin-bottom: 8px;
 }
 
 .stepDescription {
   font-size: 0.9rem;
-  color: var(--text-secondary);
+  color: var(--text-muted);
   margin-bottom: 32px;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
-/* ─── Form Elements ───────────────────────────────────────────── */
+/* Inputs */
 .formGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -255,96 +1241,91 @@ body {
 }
 
 .label {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--text-secondary);
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #d1d5db;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
 }
 
 .required {
-  color: var(--error);
-  margin-left: 2px;
+  color: var(--lux-red);
 }
 
 .input,
 .select,
 .textarea {
-  padding: 12px 16px;
+  padding: 13px 16px;
   background: var(--bg-input);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  color: var(--text-primary);
-  font-size: 0.95rem;
-  font-family: 'Inter', sans-serif;
+  border: 1px solid var(--border-card);
+  border-radius: 2px;
+  color: var(--text-white);
+  font-size: 0.92rem;
+  font-family: var(--font-body);
   transition: var(--transition);
   outline: none;
   width: 100%;
 }
 
-.input::placeholder,
-.textarea::placeholder {
-  color: var(--text-muted);
-}
-
 .input:focus,
 .select:focus,
 .textarea:focus {
-  border-color: var(--border-focus);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
-  background: rgba(28, 28, 48, 0.8);
+  border-color: var(--lux-red);
+  box-shadow: 0 0 0 2px rgba(229, 9, 20, 0.2);
 }
 
 .select {
   cursor: pointer;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%239ca3b0' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23e50914' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 14px center;
   padding-right: 36px;
 }
 
 .select option {
-  background: var(--bg-secondary);
-  color: var(--text-primary);
+  background: #12121a;
+  color: var(--text-white);
 }
 
 .textarea {
   resize: vertical;
   min-height: 100px;
-  line-height: 1.5;
 }
 
-/* ─── Category Selector ───────────────────────────────────────── */
+/* ─── Category Selection Cards Inside Wizard (Images 3 & 4 Fix) ─── */
 .categorySelector {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  gap: 14px;
   grid-column: 1 / -1;
+  margin-top: 4px;
 }
 
 .categoryCard {
-  padding: 20px 16px;
-  background: var(--bg-input);
-  border: 2px solid var(--border-color);
-  border-radius: var(--radius-lg);
+  padding: 26px 18px;
+  background: rgba(22, 22, 32, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
   cursor: pointer;
   transition: var(--transition);
   text-align: center;
   position: relative;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .categoryCard:hover {
-  border-color: rgba(99, 102, 241, 0.3);
-  background: var(--bg-card-hover);
-  transform: translateY(-2px);
+  border-color: rgba(229, 9, 20, 0.4);
+  background: rgba(28, 28, 40, 0.95);
 }
 
 .categoryCard.selected {
-  border-color: var(--accent-primary);
-  background: rgba(99, 102, 241, 0.08);
-  box-shadow: 0 0 20px var(--accent-glow);
+  border-color: var(--lux-red);
+  background: rgba(229, 9, 20, 0.08);
+  box-shadow: 0 0 20px var(--lux-red-glow);
 }
 
 .categoryCard.selected::before {
@@ -354,57 +1335,63 @@ body {
   left: 0;
   right: 0;
   height: 3px;
-  background: var(--accent-gradient);
+  background: var(--lux-red);
 }
 
-.categoryIcon {
-  font-size: 2rem;
-  margin-bottom: 8px;
-  display: block;
+.categoryIconWrap {
+  margin-bottom: 12px;
+  color: var(--lux-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .categoryName {
+  font-family: var(--font-heading);
   font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-primary);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-white);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: block;
 }
 
 .categoryDesc {
   font-size: 0.72rem;
   color: var(--text-muted);
-  margin-top: 4px;
+  line-height: 1.45;
+  display: block;
 }
 
-/* ─── Checkbox Group ──────────────────────────────────────────── */
+/* Checkboxes & Toggles */
 .checkboxGroup {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
+  gap: 10px;
 }
 
 .checkboxItem {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 14px;
+  padding: 11px 14px;
   background: var(--bg-input);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-card);
   cursor: pointer;
   transition: var(--transition);
   font-size: 0.85rem;
-  color: var(--text-secondary);
+  color: var(--text-light);
 }
 
 .checkboxItem:hover {
-  border-color: rgba(99, 102, 241, 0.3);
-  color: var(--text-primary);
+  border-color: rgba(229, 9, 20, 0.4);
 }
 
 .checkboxItem.checked {
-  border-color: var(--accent-primary);
-  background: rgba(99, 102, 241, 0.08);
-  color: var(--text-primary);
+  border-color: var(--lux-red);
+  background: rgba(229, 9, 20, 0.1);
+  color: var(--text-white);
 }
 
 .checkboxItem input[type="checkbox"] {
@@ -414,47 +1401,41 @@ body {
 .checkMark {
   width: 18px;
   height: 18px;
-  border-radius: 4px;
-  border: 2px solid var(--border-color);
+  border: 1px solid var(--border-card);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: var(--transition);
   flex-shrink: 0;
 }
 
 .checkboxItem.checked .checkMark {
-  background: var(--accent-gradient);
-  border-color: transparent;
+  background: var(--lux-red);
+  border-color: var(--lux-red);
 }
 
 .checkMark svg {
   width: 12px;
   height: 12px;
   opacity: 0;
-  transition: var(--transition);
 }
 
 .checkboxItem.checked .checkMark svg {
   opacity: 1;
 }
 
-/* ─── Toggle Switch ───────────────────────────────────────────── */
 .toggleGroup {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 16px;
+  gap: 14px;
+  padding: 14px 18px;
   background: var(--bg-input);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
+  border: 1px solid var(--border-card);
 }
 
 .toggleSwitch {
   position: relative;
   width: 44px;
   height: 24px;
-  flex-shrink: 0;
 }
 
 .toggleSwitch input {
@@ -467,58 +1448,58 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: var(--bg-secondary);
-  border-radius: 12px;
+  background: #1c1c24;
   cursor: pointer;
+  border: 1px solid var(--border-card);
   transition: var(--transition);
-  border: 1px solid var(--border-color);
 }
 
 .toggleSlider::before {
   content: '';
   position: absolute;
-  width: 18px;
-  height: 18px;
-  left: 2px;
-  bottom: 2px;
-  background: var(--text-muted);
-  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  left: 3px;
+  bottom: 3px;
+  background: var(--text-dim);
   transition: var(--transition);
 }
 
 .toggleSwitch input:checked + .toggleSlider {
-  background: var(--accent-primary);
-  border-color: var(--accent-primary);
+  background: var(--lux-red);
+  border-color: var(--lux-red);
 }
 
 .toggleSwitch input:checked + .toggleSlider::before {
   transform: translateX(20px);
-  background: white;
+  background: var(--text-white);
 }
 
 .toggleLabel {
   font-size: 0.9rem;
-  color: var(--text-secondary);
+  color: var(--text-light);
 }
 
-/* ─── Buttons ─────────────────────────────────────────────────── */
+/* Button Group inside Wizard */
 .buttonGroup {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 32px;
-  gap: 12px;
+  margin-top: 36px;
+  gap: 14px;
 }
 
 .btn {
-  padding: 12px 28px;
-  border-radius: var(--radius-md);
-  font-size: 0.95rem;
-  font-weight: 600;
-  font-family: 'Inter', sans-serif;
+  padding: 14px 30px;
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
   cursor: pointer;
   transition: var(--transition);
   border: none;
+  border-radius: 2px;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -526,70 +1507,56 @@ body {
 
 .btnBack {
   background: var(--bg-input);
-  color: var(--text-secondary);
-  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  border: 1px solid var(--border-card);
 }
 
 .btnBack:hover {
   background: var(--bg-card-hover);
-  color: var(--text-primary);
-  border-color: rgba(99, 102, 241, 0.3);
+  color: var(--text-white);
+  border-color: var(--lux-red);
 }
 
 .btnNext {
-  background: var(--accent-gradient);
-  color: white;
-  box-shadow: 0 4px 15px var(--accent-glow);
+  background: var(--lux-red);
+  color: var(--text-white);
+  box-shadow: 0 4px 15px var(--lux-red-glow);
 }
 
 .btnNext:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.35);
-}
-
-.btnNext:active {
-  transform: translateY(0);
-}
-
-.btnNext:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  transform: none;
+  background: var(--lux-red-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(229, 9, 20, 0.5);
 }
 
 .btnSubmit {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  color: white;
-  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.25);
-  padding: 14px 36px;
-  font-size: 1rem;
+  background: var(--lux-red);
+  color: var(--text-white);
+  box-shadow: 0 4px 15px var(--lux-red-glow);
+  padding: 15px 36px;
 }
 
 .btnSubmit:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
+  background: var(--lux-red-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(229, 9, 20, 0.6);
 }
 
-.btnSubmit:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  transform: none;
-}
-
-/* ─── Review Section ──────────────────────────────────────────── */
+/* Review Section inside Step 4 */
 .reviewSection {
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
 
 .reviewSectionTitle {
-  font-size: 0.8rem;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
   font-weight: 700;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--accent-primary);
+  color: var(--lux-red);
   margin-bottom: 12px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(229, 9, 20, 0.3);
 }
 
 .reviewGrid {
@@ -601,8 +1568,8 @@ body {
 .reviewItem {
   padding: 12px 16px;
   background: var(--bg-input);
-  border-radius: var(--radius-sm);
-  border: 1px solid rgba(99, 102, 241, 0.08);
+  border: 1px solid var(--border-card);
+  border-radius: 2px;
 }
 
 .reviewItem.fullWidth {
@@ -610,18 +1577,18 @@ body {
 }
 
 .reviewLabel {
-  font-size: 0.72rem;
+  font-size: 0.68rem;
+  font-family: var(--font-heading);
   font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--text-muted);
+  color: var(--text-dim);
   margin-bottom: 4px;
 }
 
 .reviewValue {
   font-size: 0.9rem;
-  color: var(--text-primary);
-  word-break: break-word;
+  color: var(--text-white);
 }
 
 .reviewTags {
@@ -633,93 +1600,86 @@ body {
 
 .reviewTag {
   padding: 3px 10px;
-  background: rgba(99, 102, 241, 0.12);
-  border-radius: 20px;
-  font-size: 0.78rem;
-  color: var(--accent-primary);
-  font-weight: 500;
+  background: rgba(229, 9, 20, 0.12);
+  border: 1px solid rgba(229, 9, 20, 0.3);
+  border-radius: 2px;
+  color: #fca5a5;
+  font-size: 0.75rem;
 }
 
-/* ─── Success Screen ──────────────────────────────────────────── */
+/* Success Screen */
 .successScreen {
   text-align: center;
   padding: 40px 20px;
-  animation: cardEnter 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .successIcon {
-  width: 80px;
-  height: 80px;
+  width: 76px;
+  height: 76px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #10b981, #059669);
+  background: var(--lux-red);
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 24px;
-  box-shadow: 0 0 40px rgba(16, 185, 129, 0.3);
-  animation: successPop 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-@keyframes successPop {
-  0% { transform: scale(0); }
-  60% { transform: scale(1.15); }
-  100% { transform: scale(1); }
+  box-shadow: 0 0 35px var(--lux-red-glow);
 }
 
 .successTitle {
+  font-family: var(--font-heading);
   font-size: 1.8rem;
   font-weight: 700;
-  margin-bottom: 8px;
-  color: var(--text-primary);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-white);
+  margin-bottom: 10px;
 }
 
 .successMessage {
   font-size: 1rem;
-  color: var(--text-secondary);
-  margin-bottom: 32px;
+  color: var(--text-light);
   line-height: 1.6;
+  margin-bottom: 32px;
 }
 
 .btnNewRequirement {
-  background: var(--accent-gradient);
-  color: white;
-  padding: 14px 32px;
-  border-radius: var(--radius-md);
-  border: none;
-  font-size: 1rem;
-  font-weight: 600;
-  font-family: 'Inter', sans-serif;
+  background: var(--bg-input);
+  color: var(--text-white);
+  border: 1px solid var(--border-card);
+  border-radius: 2px;
+  padding: 12px 24px;
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   cursor: pointer;
   transition: var(--transition);
-  box-shadow: 0 4px 15px var(--accent-glow);
 }
 
 .btnNewRequirement:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.35);
+  border-color: var(--lux-red);
+  color: var(--lux-red);
 }
 
-/* ─── Error Message ───────────────────────────────────────────── */
 .errorMessage {
-  background: rgba(239, 68, 68, 0.1);
-  border: 1px solid rgba(239, 68, 68, 0.3);
-  border-radius: var(--radius-md);
+  background: rgba(229, 9, 20, 0.12);
+  border: 1px solid var(--lux-red);
+  border-radius: 2px;
   padding: 12px 16px;
-  color: var(--error);
+  color: #fca5a5;
   font-size: 0.85rem;
   margin-bottom: 20px;
   display: flex;
   align-items: center;
   gap: 8px;
-  animation: cardEnter 0.3s ease;
 }
 
-/* ─── Loading Spinner ─────────────────────────────────────────── */
 .spinner {
   width: 20px;
   height: 20px;
   border: 2px solid transparent;
-  border-top: 2px solid currentColor;
+  border-top: 2px solid var(--text-white);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -728,14 +1688,65 @@ body {
   to { transform: rotate(360deg); }
 }
 
-/* ─── Responsive ──────────────────────────────────────────────── */
+/* ─── Responsive Media Queries ─── */
+@media (max-width: 1024px) {
+  .luxNav {
+    display: none;
+  }
+
+  .luxHeroTitle {
+    font-size: 2.4rem;
+  }
+
+  .categoryGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .footerTopGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+}
+
 @media (max-width: 768px) {
-  .appContainer {
-    padding: 24px 16px 40px;
+  .luxHeaderInner {
+    padding: 16px 20px;
+  }
+
+  .luxHero {
+    padding: 120px 16px 80px;
+  }
+
+  .luxHeroTitle {
+    font-size: 1.8rem;
+  }
+
+  .luxHeroSubtitle {
+    font-size: 0.95rem;
+  }
+
+  .luxHeroButtons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .luxBtnRed,
+  .luxBtnRedOutline {
+    width: 100%;
+    text-align: center;
+  }
+
+  .statsRow {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .footerTopGrid {
+    grid-template-columns: 1fr;
   }
 
   .formCard {
-    padding: 28px 20px;
+    padding: 24px 18px;
   }
 
   .formGrid {
@@ -755,11 +1766,7 @@ body {
   }
 
   .stepLine {
-    width: 30px;
-  }
-
-  .logo {
-    font-size: 2rem;
+    width: 28px;
   }
 
   .buttonGroup {

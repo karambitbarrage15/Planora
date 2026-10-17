@@ -1,4 +1,4 @@
-export default function SuccessScreen({ data, onNewRequirement }) {
+export default function SuccessScreen({ data, onNewRequirement, onViewFeed }) {
   return (
     <div className="formCard">
       <div className="successScreen">
@@ -10,16 +10,24 @@ export default function SuccessScreen({ data, onNewRequirement }) {
         <h2 className="successTitle">Requirement Submitted!</h2>
         <p className="successMessage">
           Your event requirement for <strong>"{data?.eventName}"</strong> has been
-          successfully submitted and categorized under{" "}
+          successfully recorded in MongoDB and categorized under{" "}
           <strong>{data?.category}</strong>.
           <br />
           <span style={{ fontSize: "0.85rem", color: "var(--text-muted)", marginTop: "8px", display: "inline-block" }}>
-            Reference ID: {data?._id}
+            MongoDB ID: {data?._id}
           </span>
         </p>
-        <button className="btnNewRequirement" onClick={onNewRequirement}>
-          Post Another Requirement
-        </button>
+
+        <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
+          {onViewFeed && (
+            <button className="btnPrimaryHero" style={{ padding: "12px 24px", fontSize: "0.95rem" }} onClick={onViewFeed}>
+              View in Live Feed →
+            </button>
+          )}
+          <button className="btnNewRequirement" style={{ padding: "12px 24px", fontSize: "0.95rem" }} onClick={onNewRequirement}>
+            Post Another Requirement
+          </button>
+        </div>
       </div>
     </div>
   );

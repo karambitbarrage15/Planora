@@ -16,18 +16,43 @@ const EVENT_TYPES = [
 const CATEGORIES = [
   {
     value: "Event Planner",
-    icon: "📋",
-    desc: "Organize & coordinate events",
+    desc: "Luxury coordination, budgeting & complete timeline execution",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+        <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
+        <path d="M9 14l2 2 4-4"/>
+      </svg>
+    ),
   },
   {
     value: "Performer",
-    icon: "🎤",
-    desc: "Artists, bands & entertainers",
+    desc: "Headline DJs, live bands, solo virtuosos & stage artists",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+        <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+        <line x1="12" y1="19" x2="12" y2="22"/>
+        <line x1="8" y1="22" x2="16" y2="22"/>
+      </svg>
+    ),
   },
   {
     value: "Crew",
-    icon: "🔧",
-    desc: "Technical & support staff",
+    desc: "Precision sound & lighting engineers, stagehands & technicians",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <line x1="4" y1="21" x2="4" y2="14"/>
+        <line x1="4" y1="10" x2="4" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="12"/>
+        <line x1="12" y1="8" x2="12" y2="3"/>
+        <line x1="20" y1="21" x2="20" y2="16"/>
+        <line x1="20" y1="12" x2="20" y2="3"/>
+        <line x1="1" y1="14" x2="7" y2="14"/>
+        <line x1="9" y1="8" x2="15" y2="8"/>
+        <line x1="17" y1="16" x2="23" y2="16"/>
+      </svg>
+    ),
   },
 ];
 
@@ -56,8 +81,7 @@ export default function EventBasicsForm({ formData, updateFormData, onNext }) {
     <>
       <h2 className="stepTitle">Event Basics</h2>
       <p className="stepDescription">
-        Tell us about your event — the name, type, dates, and what kind of
-        professional you're looking for.
+        Define the core details of your event and select the professional talent track required.
       </p>
 
       {Object.keys(errors).length > 0 && (
@@ -65,7 +89,7 @@ export default function EventBasicsForm({ formData, updateFormData, onNext }) {
           <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0-9.5a.75.75 0 0 0-.75.75v3.5a.75.75 0 0 0 1.5 0v-3.5A.75.75 0 0 0 8 5.5zM8 12a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
           </svg>
-          Please fill in all required fields
+          Please complete all required fields
         </div>
       )}
 
@@ -79,10 +103,10 @@ export default function EventBasicsForm({ formData, updateFormData, onNext }) {
             id="eventName"
             className="input"
             type="text"
-            placeholder="e.g., Summer Music Festival 2025"
+            placeholder="e.g., International Gala 2026"
             value={formData.eventName}
             onChange={(e) => updateFormData("eventName", e.target.value)}
-            style={errors.eventName ? { borderColor: "var(--error)" } : {}}
+            style={errors.eventName ? { borderColor: "var(--lux-red)" } : {}}
           />
         </div>
 
@@ -96,9 +120,9 @@ export default function EventBasicsForm({ formData, updateFormData, onNext }) {
             className="select"
             value={formData.eventType}
             onChange={(e) => updateFormData("eventType", e.target.value)}
-            style={errors.eventType ? { borderColor: "var(--error)" } : {}}
+            style={errors.eventType ? { borderColor: "var(--lux-red)" } : {}}
           >
-            <option value="">Select type...</option>
+            <option value="">Select event type...</option>
             {EVENT_TYPES.map((type) => (
               <option key={type} value={type}>
                 {type}
@@ -116,10 +140,10 @@ export default function EventBasicsForm({ formData, updateFormData, onNext }) {
             id="location"
             className="input"
             type="text"
-            placeholder="e.g., Mumbai, Maharashtra"
+            placeholder="e.g., Paris, France"
             value={formData.location}
             onChange={(e) => updateFormData("location", e.target.value)}
-            style={errors.location ? { borderColor: "var(--error)" } : {}}
+            style={errors.location ? { borderColor: "var(--lux-red)" } : {}}
           />
         </div>
 
@@ -134,14 +158,14 @@ export default function EventBasicsForm({ formData, updateFormData, onNext }) {
             type="date"
             value={formData.startDate}
             onChange={(e) => updateFormData("startDate", e.target.value)}
-            style={errors.startDate ? { borderColor: "var(--error)" } : {}}
+            style={errors.startDate ? { borderColor: "var(--lux-red)" } : {}}
           />
         </div>
 
         {/* End Date */}
         <div className="formGroup">
           <label className="label" htmlFor="endDate">
-            End Date <span style={{ fontSize: "0.7rem", color: "var(--text-muted)", fontWeight: 400 }}>(optional)</span>
+            End Date <span style={{ fontSize: "0.68rem", color: "var(--text-dim)", textTransform: "none" }}>(optional)</span>
           </label>
           <input
             id="endDate"
@@ -149,26 +173,26 @@ export default function EventBasicsForm({ formData, updateFormData, onNext }) {
             type="date"
             value={formData.endDate}
             onChange={(e) => updateFormData("endDate", e.target.value)}
-            style={errors.endDate ? { borderColor: "var(--error)" } : {}}
+            style={errors.endDate ? { borderColor: "var(--lux-red)" } : {}}
           />
         </div>
 
         {/* Venue */}
         <div className="formGroup fullWidth">
           <label className="label" htmlFor="venue">
-            Venue <span style={{ fontSize: "0.7rem", color: "var(--text-muted)", fontWeight: 400 }}>(optional)</span>
+            Venue <span style={{ fontSize: "0.68rem", color: "var(--text-dim)", textTransform: "none" }}>(optional)</span>
           </label>
           <input
             id="venue"
             className="input"
             type="text"
-            placeholder="e.g., Grand Ballroom, The Oberoi"
+            placeholder="e.g., Grand Palais, The Ritz Paris"
             value={formData.venue}
             onChange={(e) => updateFormData("venue", e.target.value)}
           />
         </div>
 
-        {/* Category Selector */}
+        {/* Category Selector with Professional SVGs & Crisp Typography */}
         <div className="formGroup fullWidth">
           <label className="label">
             Looking For <span className="required">*</span>
@@ -189,14 +213,14 @@ export default function EventBasicsForm({ formData, updateFormData, onNext }) {
                   }
                 }}
               >
-                <span className="categoryIcon">{cat.icon}</span>
-                <span className="categoryName">{cat.value}</span>
-                <span className="categoryDesc">{cat.desc}</span>
+                <div className="categoryIconWrap">{cat.icon}</div>
+                <div className="categoryName">{cat.value}</div>
+                <p className="categoryDesc">{cat.desc}</p>
               </div>
             ))}
           </div>
           {errors.category && (
-            <span style={{ color: "var(--error)", fontSize: "0.8rem", marginTop: "4px" }}>
+            <span style={{ color: "var(--lux-red)", fontSize: "0.78rem", marginTop: "6px", display: "block" }}>
               {errors.category}
             </span>
           )}
@@ -206,7 +230,7 @@ export default function EventBasicsForm({ formData, updateFormData, onNext }) {
       <div className="buttonGroup" style={{ justifyContent: "flex-end" }}>
         <button className="btn btnNext" onClick={handleNext}>
           Continue
-          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
             <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
           </svg>
         </button>

@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import LandingPage from "@/components/LandingPage";
 import StepIndicator from "@/components/StepIndicator";
 import EventBasicsForm from "@/components/EventBasicsForm";
 import CategoryStep2Form from "@/components/CategoryStep2Form";
 import CategoryStep3Form from "@/components/CategoryStep3Form";
 import ReviewSubmit from "@/components/ReviewSubmit";
 import SuccessScreen from "@/components/SuccessScreen";
+import FlowingRedBackground from "@/components/FlowingRedBackground";
 
 const INITIAL_FORM_DATA = {
   // Step 1 - Event Basics
@@ -56,10 +58,30 @@ const INITIAL_FORM_DATA = {
 };
 
 export default function Home() {
+  const [view, setView] = useState("landing"); // "landing" | "wizard"
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState(INITIAL_FORM_DATA);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submittedData, setSubmittedData] = useState(null);
+
+  const startPosting = (preselectedCategory = "") => {
+    setFormData({
+      ...INITIAL_FORM_DATA,
+      category: preselectedCategory || "",
+    });
+    setCurrentStep(1);
+    setIsSubmitted(false);
+    setSubmittedData(null);
+    setView("wizard");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const backToHome = () => {
+    setView("landing");
+    setIsSubmitted(false);
+    setSubmittedData(null);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const updateFormData = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -87,73 +109,82 @@ export default function Home() {
     setSubmittedData(null);
   };
 
-  if (isSubmitted) {
-    return (
-      <div className="appContainer">
-        <header className="header">
-          <h1 className="logo">Planora</h1>
-          <p className="subtitle">Event Requirement Posting</p>
-        </header>
-        <SuccessScreen
-          data={submittedData}
-          onNewRequirement={handleNewRequirement}
-        />
-      </div>
-    );
+  // If in landing view, render LandingPage
+  if (view === "landing") {
+    return <LandingPage onStartPosting={startPosting} />;
   }
 
-  const renderStep = () => {
-    switch (currentStep) {
-      case 1:
-        return (
-          <EventBasicsForm
-            formData={formData}
-            updateFormData={updateFormData}
-            onNext={nextStep}
-          />
-        );
-      case 2:
-        return (
-          <CategoryStep2Form
-            category={formData.category}
-            formData={formData}
-            updateNestedFormData={updateNestedFormData}
-            onNext={nextStep}
-            onBack={prevStep}
-          />
-        );
-      case 3:
-        return (
-          <CategoryStep3Form
-            category={formData.category}
-            formData={formData}
-            updateNestedFormData={updateNestedFormData}
-            onNext={nextStep}
-            onBack={prevStep}
-          />
-        );
-      case 4:
-        return (
-          <ReviewSubmit
-            formData={formData}
-            onBack={prevStep}
-            onSubmitSuccess={handleSubmitSuccess}
-          />
-        );
-      default:
-        return null;
-    }
-  };
-
+  // Wizard view
   return (
-    <div className="appContainer">
-      <header className="header">
-        <h1 className="logo">Planora</h1>
-        <p className="subtitle">Event Requirement Posting</p>
-      </header>
-      <StepIndicator currentStep={currentStep} />
-      <div className="formCard" key={currentStep}>
-        {renderStep()}
+    <div className="wizardPageWrapper">
+      {/* Animated red flowing background like nodebase.raghavseth.in */}
+      <FlowingRedBackground />
+
+      {/* Top Bar with Back Button Aligned to the Side (Not middle) */}
+      <div className="wizardTopNav">
+        <button className="btnSideBack" onClick={backToHome}>
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          BACK TO HOME
+        </button>
+
+        <div className="wizardTopBrand">
+          <span>PLANORA</span>
+        </div>
+      </div>
+
+      <div className="appContainer">
+        <header className="header">
+          <h1 className="logo">PLANORA</h1>
+          <p className="subtitle">EVENT REQUIREMENT POSTING</p>
+        </header>
+
+        {isSubmitted ? (
+          <SuccessScreen
+            data={submittedData}
+            onNewRequirement={handleNewRequirement}
+            onViewFeed={backToHome}
+          />
+        ) : (
+          <>
+            <StepIndicator currentStep={currentStep} />
+            <div className="formCard" key={currentStep}>
+              {currentStep === 1 && (
+                <EventBasicsForm
+                  formData={formData}
+                  updateFormData={updateFormData}
+                  onNext={nextStep}
+                />
+              )}
+              {currentStep === 2 && (
+                <CategoryStep2Form
+                  category={formData.category}
+                  formData={formData}
+                  updateNestedFormData={updateNestedFormData}
+                  onNext={nextStep}
+                  onBack={prevStep}
+                />
+              )}
+              {currentStep === 3 && (
+                <CategoryStep3Form
+                  category={formData.category}
+                  formData={formData}
+                  updateNestedFormData={updateNestedFormData}
+                  onNext={nextStep}
+                  onBack={prevStep}
+                />
+              )}
+              {currentStep === 4 && (
+                <ReviewSubmit
+                  formData={formData}
+                  onBack={prevStep}
+                  onSubmitSuccess={handleSubmitSuccess}
+                />
+              )}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

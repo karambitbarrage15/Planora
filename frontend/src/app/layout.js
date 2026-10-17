@@ -1,17 +1,22 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Planora — Event Requirement Posting",
-  description: "Post and manage event requirements for planners, performers, and crew with Planora.",
+  title: "Planora — Luxury Event Talent & Requirement Platform",
+  description: "The premier requirement posting platform connecting event creators with elite planners, performers, and crew.",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
-        <div className="backgroundGlow" />
-        {children}
-      </body>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body>{children}</body>
     </html>
   );
 }
